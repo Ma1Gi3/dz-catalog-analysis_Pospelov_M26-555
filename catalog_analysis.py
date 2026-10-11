@@ -186,3 +186,20 @@ def format_report_line(movie):
     )
     return film_description
 
+# Этап 5. Списки
+
+# Возвращающаем список названий фильмов, отсортированных по убыванию рейтинга
+
+def titles_sorted_by_rating(movies):
+    sorted_films = sorted(movies, key=lambda films: films['rating'], reverse=True)
+    return [films["title"] for films in sorted_films]
+
+# Возвращает список из n кортежей (title, rating) — топ по рейтингу
+
+def top_n_by_rating(movies, n=3):
+    sorted_films = sorted(movies, key=lambda films: films["rating"], reverse=True)
+    top_rating = []
+    for movie in sorted_films[:n]:
+        top_rating.append((movie['title'], movie['rating']))
+    return top_rating
+
