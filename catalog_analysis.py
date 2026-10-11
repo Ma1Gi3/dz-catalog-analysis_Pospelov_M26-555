@@ -153,3 +153,36 @@ def count_long_movies(movies, threshold=120):
         if films['duration_min'] > threshold:
             count_films += 1
     return count_films
+
+# Этап 4. Строки
+
+# Приводим строку к формату Title Case (каждое слово с заглавной буквы) 
+# без использования напрямую
+
+def normalize_title(title):
+    words = title.split()
+    separation_string = []
+    for word in words:
+        new_word = word[0].upper() + word[1:]
+        separation_string.append(new_word)
+    return " ".join(separation_string)
+
+# Превращаем нормализованное название в «слаг» вида the-quiet-algorithm
+
+def make_slug(title):
+    lower_slug = title.lower()
+    slug = lower_slug.replace(' ', '-')
+    return slug
+
+# Возвращаем единую строку с описанием фильма
+
+def format_report_line(movie):
+    sorted_genres = sorted(movie['genres'])
+    genres_string = ', '.join(str(film) for film in sorted_genres)
+    duration_films = duration_in_hours(movie['duration_min']) 
+    film_description = (
+    f'{movie['title']} ({movie['year']}) - {movie['rating']}/10, '
+    f'{duration_films}, жанры: {genres_string}'
+    )
+    return film_description
+
