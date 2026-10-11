@@ -62,6 +62,8 @@ movies = [
      "actors": ["P. Diaz", "T. Chalamet"]},
 ]
 
+ # Этап 1. Разминка: переменные, числа, math
+ 
  # Возвращает среднюю оценку по каталогу, округленную до одного знака (round). 
 
 def average_rating(movies):
@@ -94,3 +96,29 @@ def duration_in_hours(minutes):
     hours = minutes // 60 # находим часы с целочисленным делением
     minut = minutes % 60 # находим минуты с остатком от деления
     return f'{hours}ч {minut}м' # возращаем результат в нужном виде
+
+# Этап 2. Условия и match
+
+# Возвращает категорию: "шедевр" (≥9), "хорошо" (7–8.9), 
+# "средне" (5–6.9), "слабо" (<5). 
+
+def rating_tier(rating):
+    if rating >= 9:
+        return 'шедевр'
+    elif 7 <= rating < 9:
+        return 'хорошо'
+    else:
+        return 'средне' if 5 <= rating < 7 else 'слабо'
+     
+
+# возвращает метку "новые" (после 2020), 
+# "недавние" (2015–2020) или "старые" (раньше 2015).
+
+def decade_label(year):
+    match year:
+        case _ if year > 2020:
+            return 'новые'
+        case _ if 2015 <= year <= 2020:
+            return 'недавние'
+        case _ if year < 2015:
+            return 'старые'
