@@ -235,3 +235,33 @@ def apply_function(movies, average_rating): # передаем другую фу
         for movie in movies
         if movie['rating'] > ar
     }
+
+# Этап 7. Множества
+
+# Возвращает множество всех уникальных жанров каталога
+
+def all_genres(movies):
+    set_genres = set()
+    for movie in movies:
+        set_genres.update(set(movie['genres']))
+    return set_genres
+
+# Возвращает множество актеров, снимавшихся в обоих фильмах
+
+def common_actors(movie1, movie2):
+    actors1 = set(movie1['actors'])
+    actors2 = set(movie2['actors'])
+    return actors1 & actors2 
+    
+# Возвращает жанры, встречающиеся в movies_a, но не встречающиеся в movies_b
+
+def genres_only_in_one(movies_a, movies_b):
+    genres1 = set()
+    for movie in movies_a:
+        genres1.update(set(movie['genres']))
+
+    genres2 = set()
+    for movie in movies_b:
+        genres2.update(set(movie['genres']))
+    return genres1 - genres2
+
