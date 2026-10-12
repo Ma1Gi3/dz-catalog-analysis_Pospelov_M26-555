@@ -203,3 +203,35 @@ def top_n_by_rating(movies, n=3):
         top_rating.append((movie['title'], movie['rating']))
     return top_rating
 
+# Этап 6. Словари
+
+# Возвращает словарь {жанр: количество фильмов}, построенный вручную через цикл 
+# и метод dict.get() (без Counter)
+
+def count_by_genre(movies):
+    count_genre = {}
+    for movie in movies:
+        for genre in movie['genres']:
+            total_genre = count_genre.get(genre, 0)
+            count_genre[genre] = total_genre + 1
+    return count_genre
+
+# Возвращает словарь {актер: [список названий фильмов]}
+
+def actor_filmography(movies):
+    filmography = {}
+    for movie in movies:
+        for actor in movie['actors']:
+          filmography.setdefault(actor, []).append(movie['title'])
+    return filmography
+
+# Строит словарь {title: rating} только для фильмов с рейтингом выше среднего
+
+def apply_function(movies, average_rating): # передаем другую функцию как аргумент
+    for movie in movies:
+        ar = average_rating(movies)
+    return {
+        movie['title']: movie['rating']
+        for movie in movies
+        if movie['rating'] > ar
+    }
