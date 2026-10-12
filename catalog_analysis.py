@@ -265,3 +265,19 @@ def genres_only_in_one(movies_a, movies_b):
         genres2.update(set(movie['genres']))
     return genres1 - genres2
 
+# Этап 8. Итераторы и генераторы
+
+# Функция отдает фильмы с рейтингом не ниже min_rating
+
+def iter_high_rated(movies, min_rating=8.0):
+    for movie in movies:
+        if movie['rating'] >= min_rating:
+           yield movie 
+
+for movie in iter_high_rated(movies):
+    print(format_report_line(movie))
+
+# Генераторное выражение, которое считает суммарную длительность 
+# всех фильмов с рейтингом выше 7 в минутах
+
+total_duration = (sum(movie['duration_min'] for movie in movies if movie['rating'] > 7))
