@@ -130,7 +130,8 @@ def decade_label(year):
 for films in movies:
     if 'comedy' in films['genres']: 
         continue
-    print(films["title"])
+    #print(films["title"])
+    pass
 
 # Найдем первый по порядку в списке фильм с рейтингом выше 9.0
 
@@ -139,11 +140,12 @@ i = 0
 while i <= len(movies):
     movie = movies[i]
     if movie['rating'] >= 9.0:
-        print(movie['title'])
+        #print(movie['title'])
         break
     i += 1 
 else:
-    print('Шедевров не найдено')
+    #print('Шедевров не найдено')
+    pass
 
 # Считает количество фильмов длиннее threshold минут
 
