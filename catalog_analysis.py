@@ -87,7 +87,7 @@ def catalog_age_stats(movies, current_year=2026):
     newest_movie = min(ages) # определяем самый новый фильм из списка
     average_age = math.ceil(sum(ages) / len(ages)) 
 
-    return (oldest_movie, newest_movie, average_age) 
+    return (oldest_movie, newest_movie, average_age)
 
 # переводит минуты в формат "2ч 35м", 
 # используя целочисленное деление и остаток от деления.
@@ -274,10 +274,38 @@ def iter_high_rated(movies, min_rating=8.0):
         if movie['rating'] >= min_rating:
            yield movie 
 
-for movie in iter_high_rated(movies):
-    print(format_report_line(movie))
-
 # Генераторное выражение, которое считает суммарную длительность 
 # всех фильмов с рейтингом выше 7 в минутах
 
 total_duration = (sum(movie['duration_min'] for movie in movies if movie['rating'] > 7))
+
+# Этап 9. Итоговый отчет
+
+def build_report(movies):
+    print('ОТЧЕТ ПО КАТАЛОГУ')
+    
+    print(f'Средний рейтинг: {average_rating(movies)}')
+    oldest_movie, newest_movie, average_age = catalog_age_stats(movies, 
+                                                                current_year=2026)
+
+    print(f'Средний возраст фильмов: {average_age} лет \n\n')
+    
+    print('Топ-3 фильма:')
+    for movie in iter_high_rated(movies):
+        print(format_report_line(movie))
+    print()
+
+    print('Фильмов по жанрам:')
+    
+    sorted_genres = sorted(count_by_genre(movies).items(), 
+                           key=lambda x: x[1], reverse=True)
+    for key, fromkey in sorted_genres:
+        print(key, fromkey, sep=' — ', end='\n')
+    print()
+    print()
+
+    genres_line = ", ".join(sorted(all_genres(movies)))
+    print(f"Все жанры каталога: {genres_line}")
+    
+build_report(movies)
+   
