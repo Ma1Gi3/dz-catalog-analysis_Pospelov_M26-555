@@ -177,11 +177,13 @@ def make_slug(title):
 # Возвращаем единую строку с описанием фильма
 
 def format_report_line(movie):
+    big_title = movie['title']
+    title = normalize_title(big_title)
     sorted_genres = sorted(movie['genres'])
     genres_string = ', '.join(str(film) for film in sorted_genres)
     duration_films = duration_in_hours(movie['duration_min']) 
     film_description = (
-    f'{movie['title']} ({movie['year']}) - {movie['rating']}/10, '
+    f'{title} ({movie['year']}) - {movie['rating']}/10, '
     f'{duration_films}, жанры: {genres_string}'
     )
     return film_description
